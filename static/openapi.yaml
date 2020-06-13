@@ -306,6 +306,11 @@ components:
             Заголовок публикации
           type: string
           example: 'Очень интересная публикация'
+        slug:
+          description: |
+            Slug публикации
+          type: string
+          example: 'ochen-interesnaya-publikaciya'
         author:
           description: |
             Автор публикации
