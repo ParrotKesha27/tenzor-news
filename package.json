@@ -1,0 +1,30 @@
+{
+  "name": "tenzor-news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ViktorKoshelev/tenzor-news.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ViktorKoshelev/tenzor-news/issues"
+  },
+  "homepage": "https://github.com/ViktorKoshelev/tenzor-news#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.10.2",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
