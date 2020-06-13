@@ -30,7 +30,7 @@ paths:
             Индекс стартового элемента
           schema:
             type: integer
-            example: 0
+            example: '0'
         - in: query
           required: true
           name: sortOrder
@@ -95,7 +95,7 @@ paths:
             Индекс стартового элемента
           schema:
             type: integer
-            example: 0
+            example: '0'
         - in: query
           required: true
           name: sortOrder
@@ -199,7 +199,7 @@ paths:
             Индекс стартового элемента
           schema:
             type: integer
-            example: 0
+            example: '0'
         - in: query
           required: true
           name: sortOrder
