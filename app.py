@@ -1,19 +1,16 @@
 from flask import Flask
-from flask_swagger_ui import get_swaggerui_blueprint
+from route.openapi import swaggerui_blueprint, SWAGGER_URL
+from database.db import initialize_db
 
 app = Flask(__name__)
-
-SWAGGER_URL = '/api/docs'
-OPENAPI_PATH = '/static/openapi.yaml'
-swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    OPENAPI_PATH,
-    config={
-        'app_name': "Tenzor-news"
-    }
-)
+app.config['MONGODB_SETTINGS'] = {
+    'host': 'mongodb+srv://admin:adminpassword@cluster0-4ubld.mongodb.net/main_db?retryWrites=true&w=majority'
+}
+db = initialize_db(app)
 
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+
 
 @app.route('/')
 def hello_world():
