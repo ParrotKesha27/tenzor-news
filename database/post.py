@@ -1,9 +1,8 @@
 from mongoengine import DoesNotExist
-from database.db import db
-from .category import *
-from .tag import *
-from models.post_preview import PostPreview
-from models.post_list import PostList
+from .db import db
+from .category import Category, find_category_by_slug
+from .tag import Tag, get_array_tags
+from models.post_list import build_post_list
 from models.post_detail import PostDetail
 from slugify import slugify
 import datetime
@@ -25,39 +24,21 @@ def get_post_list(limit, offset, sort):
     posts = Post.objects[offset:limit].order_by(sort)
     count = Post.objects.count()
 
-    array_post = []
-    for post in posts:
-        array_post.append(PostPreview(post))
-
-    has_more = offset + limit < count
-
-    return PostList(array_post, has_more)
+    return build_post_list(posts, count, limit, offset)
 
 
 def get_post_list_by_category(category, limit, offset, sort):
     posts = Post.objects(category=category.id)[offset:limit].order_by(sort)
     count = Post.objects(category=category.id).count()
 
-    array_post = []
-    for post in posts:
-        array_post.append(PostPreview(post))
-
-    has_more = offset + limit < count
-
-    return PostList(array_post, has_more)
+    return build_post_list(posts, count, limit, offset)
 
 
 def get_post_list_by_tag(tag, limit, offset, sort):
     posts = Post.objects(tags=tag.id)[offset:limit].order_by(sort)
     count = Post.objects(tags=tag.id).count()
 
-    array_post = []
-    for post in posts:
-        array_post.append(PostPreview(post))
-
-    has_more = offset + limit < count
-
-    return PostList(array_post, has_more)
+    return build_post_list(posts, count, limit, offset)
 
 
 def get_post_detail(category, post_slug):
@@ -71,7 +52,7 @@ def get_post_detail(category, post_slug):
 
 def create_post(data):
     category = find_category_by_slug(data['category'])
-    tags = find_tags_by_slug(data['tags'])
+    tags = get_array_tags(data['tags'])
     post = Post(
         title=data['title'],
         slug=slugify(data['title']),
