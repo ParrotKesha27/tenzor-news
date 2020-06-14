@@ -4,6 +4,7 @@ import styles from '../styles/new_post.module.css'
 import { Editor } from '@tinymce/tinymce-react';
 import React from 'react';
 import Router from 'next/router'
+import config from '../components/config'
 
 export default class NewPost extends React.Component {
 	constructor(props) {
@@ -19,32 +20,32 @@ export default class NewPost extends React.Component {
 	}
 	async handleSubmit(event) {
 		event.preventDefault();
-    const formElements = event.target.elements;
-    const body = {
-      author: formElements.name.value,
-      title: formElements.title.value,
-      tags: formElements.hashtags.value.split(', '),
-      image: this.state.image,
-      content: encodeURI(this.state.content),
-      category: this.state.category
-    }
+	    const formElements = event.target.elements;
+	    const body = {
+	      author: formElements.name.value,
+	      title: formElements.title.value,
+	      tags: formElements.hashtags.value.split(', '),
+	      image: this.state.image,
+	      content: encodeURI(this.state.content),
+	      category: this.state.category
+	    }
 
-    if (!body.name || !body.title || !body.content ||
-      !formElements.hashtags.value) {
-      return;
-    }
+	    if (!body.author || !body.title || !body.content ||
+	      !formElements.hashtags.value) {
+	      return;
+	    }
     
-		let response = await fetch('/api/v1/new_post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    });
-/*
-    let result = await response.json();
-    Router.push('/')
-*/
+		let response = await fetch(config.serverUrl + '/api/v1/posts/new', {
+	      method: 'POST',
+	      mode: 'no-cors',
+	      headers: {
+	        'Content-Type': 'application/json;charset=utf-8'
+	      },
+	      body: JSON.stringify(body)
+	    });
+
+	    Router.push('/')
+
 	}
 	handleImageLoad(event) {
 		const reader = new FileReader()
