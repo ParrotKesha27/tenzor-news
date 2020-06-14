@@ -89,29 +89,33 @@ export default function MainPost(props) {
       <div className={classes.cardDetails}>
         <CardContent>
           <Typography variant="subtitle2">
-            <span className={classes.postInfoSpan}>{post.author} автор </span>
+            <span className={classes.postInfoSpan}>{post.author}</span>
             <span className={classes.postInfoSpan}>&#183;</span>
             <Link href="#" color="inherit">
               <a className={classes.postLink}>
-                <span className={classes.postInfoSpan}>{post.category} категория </span>
+                <span className={classes.postInfoSpan}>{post.category.name}</span>
               </a>
             </Link>
             {props.main &&
               <span>
                 <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}>{post.cratedAt} дата </span>
+                <span className={classes.postInfoSpan}>{post.createdAt}</span>
                 <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount} просмотры </span>
+                <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount}</span>
               </span>
             }
           </Typography>
           <Typography className={classes.postTitle} component="h1" variant="h3">
-            <Link href="#" color="inherit">
+            <Link href="#">
               <a className={classes.postLink}>{post.title}</a>
             </Link>
           </Typography>
           <Typography variant="body2">
-            {post.tags} #reer #rwrw
+            {post.tags.map(({name, slug}) => (
+              <Link href={"/tags/" + slug}>
+                <a className={classes.postLink} style={{marginRight: '10px', display: 'inline-block'}}>{name} </a>
+              </Link>
+            ))}
           </Typography>
         </CardContent>
       </div>

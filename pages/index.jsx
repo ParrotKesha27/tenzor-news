@@ -7,67 +7,70 @@ import MainPost from '../components/main_post';
 import SmallPost from '../components/small_post';
 import Typography from '@material-ui/core/Typography';
 
-const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
-  imgText: 'main image description',
-  linkText: 'Continue reading…',
-};
+class Blog extends React.Component {
+  async MorePosts() {
+    const res3 = await fetch(`https://tenzor-news-back.herokuapp.com/api/v1/posts?limit=5&offset=` + this.state.items.length + `&sortOrder=createdAt&sortDirection=desc`, {mode: 'cors'})
+    const data3 = await res3.json()
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
-];
+    this.setState({items: this.state.items.concat(data3.items), hasMore: data3.hasMore})
+  }
 
-function Blog() {
-  return (
-    <React.Fragment>
-      <Container maxWidth="lg">
-        <main>
-          <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-            Популярные материалы
-          </Typography>
-          <MainPost post={mainFeaturedPost} main />
-          <Grid container spacing={4} style={{marginTop: '30px'}}>
-            {featuredPosts.map((post) => (
-              <SmallPost key={post.title} post={post} />
+  constructor(props) {
+    super(props)
+    const {data, data2} = props
+    this.state = {items: data2.items, hasMore: data2.hasMore, data}
+    this.MorePosts = this.MorePosts.bind(this)
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Container maxWidth="lg">
+          <main>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+              Популярные материалы
+            </Typography>
+            <MainPost post={this.state.data.items[0]} main />
+            <Grid container spacing={4} style={{marginTop: '30px'}}>
+              {this.state.data.items.slice(1).map((post) => (
+                <SmallPost key={post.title} post={post} />
+              ))}
+            </Grid>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+              Новые материалы
+            </Typography>
+            {this.state.items.map((post) => (
+                <MainPost key={post.title} post={post} />
             ))}
-          </Grid>
-          <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-            Новые материалы
-          </Typography>
-          <MainPost post={mainFeaturedPost} />
-          <Button variant="outlined" style={{width: '100%', marginTop: '30px'}}>
-            Загрузить еще
-          </Button>
-        </main>
-      </Container>
-    </React.Fragment>
+            {this.state.hasMore &&
+              <Button variant="outlined" style={{width: '100%', marginTop: '30px'}} onClick={this.MorePosts}>
+                Загрузить еще
+              </Button>
+            }
+          </main>
+        </Container>
+      </React.Fragment>
+    );
+  }
+}
+
+function Index({data, data2}) {
+  return (
+    <Layout>
+      <Blog data={data} data2={data2}/>
+    </Layout>
   );
 }
 
-function Index() {
-  return (
-    <Layout>
-      <Blog />
-    </Layout>
-  );
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://tenzor-news-back.herokuapp.com/api/v1/posts?limit=3&offset=0&sortOrder=viewsCount&sortDirection=desc`, {mode: 'cors'})
+  const data = await res.json()
+
+  const res2 = await fetch(`https://tenzor-news-back.herokuapp.com/api/v1/posts?limit=5&offset=0&sortOrder=createdAt&sortDirection=desc`, {mode: 'cors'})
+  const data2 = await res2.json()
+  //throw new Error(data)
+  // Pass data to the page via props
+  return { props: { data, data2 } }
 }
 
 export default Index

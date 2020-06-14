@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   postLink: {
     color: '#000000',
     textDecoration: 'none',
+    display: 'inline-block',
     '&:hover': {
       textDecoration: 'none',
       color: '#54426B',
@@ -63,25 +64,29 @@ export default function SmallPost(props) {
           <Grid item>
             <div className={classes.featuredPostContent}>
               <Typography variant="subtitle2">
-                <span className={classes.postInfoSpan}>{post.author} автор </span>
+                <span className={classes.postInfoSpan}>{post.author} </span>
                 <span className={classes.postInfoSpan}>&#183;</span>
                 <Link href="#" color="inherit">
                   <a className={classes.postLink}>
-                    <span className={classes.postInfoSpan}>{post.category} категория </span>
+                    <span className={classes.postInfoSpan}>{post.category.name}</span>
                   </a>
                 </Link>
                 <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}>{post.cratedAt} дата </span>
+                <span className={classes.postInfoSpan}>{post.createdAt}</span>
                 <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount} просмотры </span>
+                <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount}</span>
               </Typography>
               <Typography className={classes.postTitle} variant="h4">
-                <Link href="#" color="inherit">
+                <Link href="#">
                   <a className={classes.postLink}>{post.title}</a>
                 </Link>
               </Typography>
               <Typography variant="body2">
-                {post.tags} #reer #rwrw
+                {post.tags.map(({name, slug}) => (
+                  <Link href={"/tags/" + slug}>
+                    <a className={classes.postLink} style={{marginRight: '10px'}}>{name} </a>
+                  </Link>
+                ))}
               </Typography>
             </div>
           </Grid>
