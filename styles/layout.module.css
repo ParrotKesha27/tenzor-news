@@ -1,6 +1,36 @@
 .container {
-    padding-top: 64px;
-    min-height: 100%;
-    box-sizing: border-box;
-    background-color: #F4F4F8; 
+    margin: 100px;
+}
+.Footer__logo {
+    font-size: 38px;
+	font-weight: bold;
+	text-decoration: none;
+    color: #271F33;
+    justify-content: center;
+}
+.Footer__category {
+    color: #271F33;
+    font-weight: bold;
+    text-decoration: none;
+}
+.Footer__category:hover {
+	color: #54426B;
+}
+.Footer__categories {
+    display: flex;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 20px;
+	justify-content: space-between;
+}
+.Footer__github {
+    display: flex;
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+	  justify-content: space-between;
 }
