@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }) {
                 <Link href="/games">
                   <a className="Menu__category">Игры</a>
                 </Link>
-                <Link href="/cinema">
+                <Link href="/films">
                   <a className="Menu__category">Фильмы</a>
                 </Link>
               </div>

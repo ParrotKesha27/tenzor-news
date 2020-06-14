@@ -91,22 +91,18 @@ export default function MainPost(props) {
           <Typography variant="subtitle2">
             <span className={classes.postInfoSpan}>{post.author}</span>
             <span className={classes.postInfoSpan}>&#183;</span>
-            <Link href="#" color="inherit">
+            <Link href={"/" + post.category.slug} color="inherit">
               <a className={classes.postLink}>
                 <span className={classes.postInfoSpan}>{post.category.name}</span>
               </a>
             </Link>
-            {props.main &&
-              <span>
-                <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}>{post.createdAt}</span>
-                <span className={classes.postInfoSpan}>&#183;</span>
-                <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount}</span>
-              </span>
-            }
+            <span className={classes.postInfoSpan}>&#183;</span>
+            <span className={classes.postInfoSpan}>{post.createdAt}</span>
+            <span className={classes.postInfoSpan}>&#183;</span>
+            <span className={classes.postInfoSpan}><VisibilityIcon style={{fontSize: 'medium', verticalAlign: 'middle'}}/> {post.viewsCount}</span>
           </Typography>
           <Typography className={classes.postTitle} component="h1" variant="h3">
-            <Link href="#">
+            <Link href={"/" + post.category.slug + "/" + post.slug}>
               <a className={classes.postLink}>{post.title}</a>
             </Link>
           </Typography>
