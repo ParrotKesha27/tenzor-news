@@ -13,7 +13,7 @@ export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <main>{children}</main>
-      <footer>
+      <footer style={{marginTop: '50px'}}>
 				<Container maxWidth="lg">
 					<div style={{display: 'flex', justifyContent: 'center'}}>
 						<Link href="/">
