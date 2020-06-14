@@ -1,17 +1,19 @@
 import styles from '../styles/layout.module.css'
-import Toolbar from '@material-ui/core/Toolbar'
 import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
 //import IvanGithub from '../images/vaxo.png'
 import Link from 'next/link'
 //import utilStyles from '../styles/utils.module.css'
 
-const name = 'Your Name'
 export const siteTitle = 'Next.js Sample Website'
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home, header }) {
   return (
     <div className={styles.container}>
+			{header &&
+				<div className={styles.Title}>
+					{header}
+				</div>
+			}
       <main>{children}</main>
       <footer style={{marginTop: '50px'}}>
 				<Container maxWidth="lg">
@@ -27,7 +29,7 @@ export default function Layout({ children, home }) {
 						<Link href="/games">
 							<a className={styles.Footer__category}>Игры</a>
 						</Link>
-						<Link href="/cinema">
+						<Link href="/films">
 							<a className={styles.Footer__category}>Фильмы</a>
 						</Link>
 					</div>
