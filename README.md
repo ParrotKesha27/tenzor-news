@@ -17,3 +17,15 @@ MVP:
 - Личный кабинет
 - Лайки/Дизлайки
 - Комментарии
+
+## Установка
+```
+pip install pipenv
+pipenv shell
+pipenv install
+
+python app.py
+```
+
+## Спецификация
+Спецификация проекта доступа по урлу /api/docs

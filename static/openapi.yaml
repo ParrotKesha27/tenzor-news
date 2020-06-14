@@ -8,7 +8,7 @@ info:
   version: 1.0.0
 
 paths:
-  /posts/:
+  /posts:
     get:
       summary: Получение списка публикаций
       description: Метод для получения списка публикаций
@@ -236,7 +236,7 @@ paths:
         "500":
           $ref: '#/components/responses/500Error'
 
-  /posts/new/:
+  /posts/new:
     post:
       summary: Создание новой публикации
       description: Метод для создания новой публикации
@@ -246,14 +246,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ''
+              $ref: '#/components/schemas/NewPost'
       responses:
         "200":
           description: 'Успешное выполнение'
-          content:
-            application/json:
-              schema:
-                $ref: ""
         "400":
           $ref: '#/components/responses/400Error'
         "500":
@@ -407,6 +403,43 @@ components:
             Slug категории
           type: string
           example: 'blablabla'
+
+    NewPost:
+      title: Новая публикация
+      description: Данные с формы для новой публикации
+      properties:
+        title:
+          description: |
+            Заголовок
+          type: string
+          example: 'Новая публикация'
+        author:
+          description: |
+            Автор
+          type: string
+          example: 'Иван Иванов'
+        category:
+          description: |
+            Slug категории
+          type: string
+          example: 'memes'
+        image:
+          description: |
+            Изображение в base64
+          type: string
+          example: 'base64'
+        content:
+          description: |
+            Контент поста
+          type: string
+          example: 'Очень интересная публикация'
+        tags:
+          description: |
+            Массив тегов
+          type: array
+          items:
+            type: string
+          example: ['раз', 'два', 'три']
 
     Error:
       title: Описание ошибки

@@ -1,5 +1,6 @@
 from flask import Flask
 from route.openapi import swaggerui_blueprint, SWAGGER_URL
+from route.post import posts
 from database.db import initialize_db
 
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app.config['MONGODB_SETTINGS'] = {
 db = initialize_db(app)
 
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
-
+app.register_blueprint(posts)
 
 
 @app.route('/')
