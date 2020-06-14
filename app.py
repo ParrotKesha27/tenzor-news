@@ -1,9 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
 from route.openapi import swaggerui_blueprint, SWAGGER_URL
 from route.post import posts
 from database.db import initialize_db
 
 app = Flask(__name__)
+CORS(app)
+
 app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb+srv://admin:adminpassword@cluster0-4ubld.mongodb.net/main_db?retryWrites=true&w=majority'
 }
