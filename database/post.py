@@ -71,7 +71,7 @@ def get_post_detail(category, post_slug):
 
 def create_post(data):
     category = find_category_by_slug(data['category'])
-    tags = find_tags_by_slug(data['tags'])
+    tags = get_array_tags(data['tags'])
     post = Post(
         title=data['title'],
         slug=slugify(data['title']),

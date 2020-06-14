@@ -79,3 +79,5 @@ def get_detail_post(category, post):
 @posts.route('/api/v1/posts/new', methods=['POST'])
 def new_post():
     request_data = request.get_json(force=True)
+    post_id = create_post(request_data)
+    return Response(str(post_id), 200, content_type='application/json')
