@@ -1,10 +1,9 @@
 import Button from '@material-ui/core/Button';
+import Layout from '../components/layout';
 
 function Index() {
   return (
-    <Button variant="contained" color="primary">
-      Hello World
-    </Button>
+    <Layout />
   );
 }
 
