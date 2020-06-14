@@ -3,6 +3,8 @@
 
 Команда: [Игнат Краснов](https://github.com/ParrotKesha27), [Виктор Кошелев](https://github.com/ViktorKoshelev), [Иван Ежов](https://github.com/vunyuya)
 
+Макет: [Figma](https://www.figma.com/file/kNIvFQ8bjLVCCwETZLhhoo/Tenzor-News?node-id=0%3A1)
+
 ## Описание проекта
 MVP:
 - Лента новостей с публикациями пользователей
@@ -15,3 +17,15 @@ MVP:
 - Личный кабинет
 - Лайки/Дизлайки
 - Комментарии
+
+## Установка
+```
+pip install pipenv
+pipenv shell
+pipenv install
+
+python app.py
+```
+
+## Спецификация
+Спецификация проекта доступа по урлу /api/docs

@@ -1,0 +1,454 @@
+openapi: 3.0.0
+servers:
+  - url: "/api/v1"
+info:
+  title: Tenzor-news API
+  description: >-
+    Описание методов API используемых в проекте
+  version: 1.0.0
+
+paths:
+  /posts:
+    get:
+      summary: Получение списка публикаций
+      description: Метод для получения списка публикаций
+      tags:
+        - Post
+      parameters:
+        - in: query
+          required: true
+          name: limit
+          description: |
+            Количество элементов в выборке
+          schema:
+            type: integer
+            example: 5
+        - in: query
+          required: true
+          name: offset
+          description: |
+            Индекс стартового элемента
+          schema:
+            type: integer
+            example: '0'
+        - in: query
+          required: true
+          name: sortOrder
+          description: |
+            Сортировка по полю
+          schema:
+            type: string
+            enum:
+              - createdAt
+              - viewsCount
+            default: 'createdAt'
+        - in: query
+          required: true
+          name: sortDirection
+          description: |
+            Порядок сортировки
+          schema:
+            type: string
+            enum:
+              - desc
+              - asc
+            default: 'desc'
+      responses:
+        "200":
+          description: 'Успешное выполнение'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostList'
+        "400":
+          $ref: '#/components/responses/400Error'
+        "500":
+          $ref: '#/components/responses/500Error'
+
+  /posts/{category}:
+    get:
+      summary: Получение списка публикаций по категории
+      description: Метод для получения списка публикаций по категории
+      tags:
+        - Post
+      parameters:
+        - in: path
+          name: category
+          required: true
+          description: |
+            Slug категории
+          schema:
+            type: string
+            example: 'memes'
+        - in: query
+          required: true
+          name: limit
+          description: |
+            Количество элементов в выборке
+          schema:
+            type: integer
+            example: 5
+        - in: query
+          required: true
+          name: offset
+          description: |
+            Индекс стартового элемента
+          schema:
+            type: integer
+            example: '0'
+        - in: query
+          required: true
+          name: sortOrder
+          description: |
+            Сортировка по полю
+          schema:
+            type: string
+            enum:
+              - createdAt
+              - viewsCount
+            default: 'createdAt'
+        - in: query
+          required: true
+          name: sortDirection
+          description: |
+            Порядок сортировки
+          schema:
+            type: string
+            enum:
+              - desc
+              - asc
+            default: 'desc'
+      responses:
+        "200":
+          description: 'Успешное выполнение'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostList'
+        "400":
+          $ref: '#/components/responses/400Error'
+        "404":
+          $ref: '#/components/responses/404Error'
+        "500":
+          $ref: '#/components/responses/500Error'
+
+  /posts/{category}/{post}:
+    get:
+      summary: Получение детальной страницы публикации
+      description: Метод для получения детальной страницы публикации
+      tags:
+        - Post
+      parameters:
+        - in: path
+          name: category
+          required: true
+          description: |
+            Slug категории
+          schema:
+            type: string
+            example: 'memes'
+        - in: path
+          name: post
+          required: true
+          description: |
+            Slug публикации
+          schema:
+            type: string
+            example: 'some-publication'
+      responses:
+        "200":
+          description: 'Успешное выполнение'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetail'
+        "400":
+          $ref: '#/components/responses/400Error'
+        "404":
+          $ref: '#/components/responses/404Error'
+        "500":
+          $ref: '#/components/responses/500Error'
+
+  /posts/tags/{tag}:
+    get:
+      summary: Получение списка публикаций по хэштегу
+      description: Метод получения списка публикаций по хэштегу
+      tags:
+        - Post
+      parameters:
+        - in: path
+          required: true
+          name: tag
+          description: |
+            Slug тэга
+          schema:
+            type: string
+            example: 'some-tag'
+        - in: query
+          required: true
+          name: limit
+          description: |
+            Количество элементов в выборке
+          schema:
+            type: integer
+            example: 5
+        - in: query
+          required: true
+          name: offset
+          description: |
+            Индекс стартового элемента
+          schema:
+            type: integer
+            example: '0'
+        - in: query
+          required: true
+          name: sortOrder
+          description: |
+            Сортировка по полю
+          schema:
+            type: string
+            enum:
+              - createdAt
+              - viewsCount
+            default: 'createdAt'
+        - in: query
+          required: true
+          name: sortDirection
+          description: |
+            Порядок сортировки
+          schema:
+            type: string
+            enum:
+              - desc
+              - asc
+            default: 'desc'
+      responses:
+        "200":
+          description: 'Успешное выполнение'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostList'
+        "400":
+          $ref: '#/components/responses/400Error'
+        "404":
+          $ref: '#/components/responses/404Error'
+        "500":
+          $ref: '#/components/responses/500Error'
+
+  /posts/new:
+    post:
+      summary: Создание новой публикации
+      description: Метод для создания новой публикации
+      tags:
+        - Post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPost'
+      responses:
+        "200":
+          description: 'Успешное выполнение'
+        "400":
+          $ref: '#/components/responses/400Error'
+        "500":
+          $ref: '#/components/responses/500Error'
+
+components:
+  responses:
+    400Error:
+      description: Запрос составлен некорректно
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    404Error:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    500Error:
+      description: Серверная ошибка
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+    PostList:
+      title: Список публикаций
+      description: Список публикаций
+      properties:
+        items:
+          description: |
+            Массив публикаций
+          type: array
+          items:
+           $ref: '#/components/schemas/PostPreview'
+        hasMore:
+          description: |
+            Флаг для кнопки "Загрузить еще"
+          type: boolean
+          example: true
+
+    PostPreview:
+      title: Превью публикации
+      description: Превью публикации используемая в списках
+      properties:
+        title:
+          description: |
+            Заголовок публикации
+          type: string
+          example: 'Очень интересная публикация'
+        slug:
+          description: |
+            Slug публикации
+          type: string
+          example: 'ochen-interesnaya-publikaciya'
+        author:
+          description: |
+            Автор публикации
+          type: string
+          example: 'Иван Иванов'
+        category:
+          $ref: '#/components/schemas/Category'
+        createdAt:
+          description: |
+            Дата cоздания публикации
+          type: string
+          example: '12 июня 2020'
+        viewsCount:
+          description: |
+            Количество просмотров
+          type: integer
+          example: 1234
+        image:
+          description: |
+            Картинка превью
+          type: string
+          example: '/images/cute-cat.jpg'
+        tags:
+          description: |
+            Массив тегов публикации
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    PostDetail:
+      title: Детальная публикация
+      description: Детальная страница публикации
+      properties:
+        title:
+          description: |
+            Заголовок публикации
+          type: string
+          example: 'Очень интересная публикация'
+        author:
+          description: |
+            Автор публикации
+          type: string
+          example: 'Иван Иванов'
+        category:
+          $ref: '#/components/schemas/Category'
+        createdAt:
+          description: |
+            Дата cоздания публикации
+          type: string
+          example: '12 июня 2020'
+        viewsCount:
+          description: |
+            Количество просмотров
+          type: integer
+          example: 1234
+        content:
+          description: |
+            Контент публикации
+          type: string
+          example: 'очень интересный контент'
+        tags:
+          description: |
+            Массив тегов публикации
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    Category:
+      title: Категория
+      description: Категория публикации
+      properties:
+        name:
+          description: |
+            Название категории
+          type: string
+          example: 'Мемы'
+        slug:
+          description: |
+            Slug категории
+          type: string
+          example: 'memes'
+
+    Tag:
+      title: Хэштег
+      description: Хэштег публикации
+      properties:
+        name:
+          description: |
+            Название тега
+          type: string
+          example: 'блаблабла'
+        slug:
+          description: |
+            Slug категории
+          type: string
+          example: 'blablabla'
+
+    NewPost:
+      title: Новая публикация
+      description: Данные с формы для новой публикации
+      properties:
+        title:
+          description: |
+            Заголовок
+          type: string
+          example: 'Новая публикация'
+        author:
+          description: |
+            Автор
+          type: string
+          example: 'Иван Иванов'
+        category:
+          description: |
+            Slug категории
+          type: string
+          example: 'memes'
+        image:
+          description: |
+            Изображение в base64
+          type: string
+          example: 'base64'
+        content:
+          description: |
+            Контент поста
+          type: string
+          example: 'Очень интересная публикация'
+        tags:
+          description: |
+            Массив тегов
+          type: array
+          items:
+            type: string
+          example: ['раз', 'два', 'три']
+
+    Error:
+      title: Описание ошибки
+      description: Описание ошибки для всех методов
+      properties:
+        message:
+          description: |
+            Сообщение ошибки
+          type: string
+          example: Упс! Что-то пошло не так
+      required:
+        - message
