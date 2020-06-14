@@ -17,6 +17,7 @@ flask-mongoengine = "*"
 dnspython = "*"
 jsonpickle = "*"
 python-slugify = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
