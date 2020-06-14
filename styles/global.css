@@ -22,10 +22,14 @@
 .Menu__category:hover {
 	color: #54426B;
 }
-#__next {
-	min-height: 100%;
+
+html {
+	height: 100%;
 }
 body {
+	height: 100%;
 	font-family: 'Roboto', sans-serif;
+}
+#__next {
 	height: 100%;
 }

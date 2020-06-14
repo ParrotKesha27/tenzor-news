@@ -1,0 +1,23 @@
+.flex-container {
+	display: flex;
+	flex-direction: column;
+}
+.flex-element {
+	padding: 32px 150px 0;
+
+}
+.title {
+	font-size: 36px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+.field {
+	width: 100%;
+}
+.input {
+	display: none;
+}
+.image {
+	vertical-align: top;
+    margin-left: 50px;
+}
