@@ -3,6 +3,7 @@ from database.post import *
 from database.category import *
 from database.tag import *
 import jsonpickle
+from models.error import Error
 
 posts = Blueprint('posts', __name__)
 
@@ -27,7 +28,8 @@ def get_posts():
 def get_posts_by_category(category):
     category_doc = find_category_by_slug(category)
     if category_doc is None:
-        return Response('Category with slug ' + category + ' not found!', 404, content_type='application/json')
+        error = Error('Category with slug {} not found!'.format(category))
+        return Response(jsonpickle.encode(error, unpicklable=False), 404, content_type='application/json')
 
     limit = int(request.args.get('limit'))
     offset = int(request.args.get('offset'))
@@ -47,7 +49,8 @@ def get_posts_by_category(category):
 def get_posts_by_tag(tag):
     tag_doc = find_tag_by_slug(tag)
     if tag_doc is None:
-        return Response('Category with slug ' + tag + ' not found!', 404, content_type='application/json')
+        error = Error('Tag with slug {} not found!'.format(tag))
+        return Response(jsonpickle.encode(error, unpicklable=False), 404, content_type='application/json')
 
     limit = int(request.args.get('limit'))
     offset = int(request.args.get('offset'))
@@ -67,11 +70,13 @@ def get_posts_by_tag(tag):
 def get_detail_post(category, post):
     category_doc = find_category_by_slug(category)
     if category_doc is None:
-        return Response('Category with slug ' + category + ' not found!', 404, content_type='application/json')
+        error = Error('Category with slug {} not found!'.format(category))
+        return Response(jsonpickle.encode(error, unpicklable=False), 404, content_type='application/json')
 
     post_detail = get_post_detail(category_doc, post)
     if post_detail is None:
-        return Response('Post with slug ' + post + ' not found!', 404, content_type='application/json')
+        error = Error('Post with slug {} not found!'.format(post))
+        return Response(jsonpickle.encode(error, unpicklable=False), 404, content_type='application/json')
     else:
         return Response(jsonpickle.encode(post_detail, unpicklable=False), 200, content_type='application/json')
 

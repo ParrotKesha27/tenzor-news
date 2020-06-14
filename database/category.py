@@ -1,5 +1,5 @@
 from mongoengine import DoesNotExist
-from database.db import db
+from .db import db
 
 
 class Category(db.Document):
