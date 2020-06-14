@@ -1,16 +1,36 @@
 .header {
-	height: 280px;
 	padding: 32px 150px 0;
+}
+.info {
+	font-size: 24px;
+}
+.info span {
+	margin-right: 24px;
+}
+.title {
+	font-weight: bold;
+	font-size: 64px;
+	margin-top: 16px;
 }
 .content {
 	padding: 32px 150px 0;
+	font-size: 24px;
 }
 .hashtags {
 	padding: 32px 150px 0;
 }
 .hashtag {
 	text-decoration: underline;
+	color: black;
+	font-size: 24px;
+}
+.hashtag:hover, .link:hover {
+	color: #54426B;
 }
 .hashtag:before {
 	content: '#';
+}
+.link {
+	text-decoration: none;
+	color: black;
 }
