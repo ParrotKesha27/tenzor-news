@@ -3,10 +3,6 @@ from flask_cors import CORS
 from route.openapi import swaggerui_blueprint, SWAGGER_URL
 from route.post import posts
 from database.db import initialize_db
-import locale
-
-
-locale.setlocale(locale.LC_ALL, 'ru_RU')
 
 app = Flask(__name__)
 CORS(app)
