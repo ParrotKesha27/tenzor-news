@@ -8,7 +8,7 @@ class PostDetail:
         self.slug = post.slug
         self.author = post.author
         self.category = Category(post.category)
-        self.createdAt = post.createdAt.strftime('%d %B %Y')
+        self.createdAt = post.createdAt.strptime('%d %B %Y')
         self.viewsCount = post.viewsCount
         self.content = post.content
         self.tags = []

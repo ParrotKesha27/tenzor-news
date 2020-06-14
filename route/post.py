@@ -15,6 +15,14 @@ def get_posts():
     sort_order = request.args.get('sortOrder')
     sort_direction = request.args.get('sortDirection')
 
+    if limit <= 0:
+        error = Error('Limit must be greater than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
+
+    if offset < 0:
+        error = Error('Offset must be greater or equal than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
+
     if sort_direction == 'asc':
         sort_order = '+' + sort_order
     else:
@@ -36,10 +44,21 @@ def get_posts_by_category(category):
     sort_order = request.args.get('sortOrder')
     sort_direction = request.args.get('sortDirection')
 
+    if limit <= 0:
+        error = Error('Limit must be greater than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
+
+    if offset < 0:
+        error = Error('Offset must be greater or equal than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
+
     if sort_direction == 'asc':
         sort_order = '+' + sort_order
-    else:
+    elif sort_direction == 'desc':
         sort_order = '-' + sort_order
+    else:
+        error = Error('Sort direction must be equal "asc" or "desc"')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
 
     post_list = get_post_list_by_category(category_doc, limit, offset, sort_order)
     return Response(jsonpickle.encode(post_list, unpicklable=False), 200, content_type='application/json')
@@ -56,6 +75,14 @@ def get_posts_by_tag(tag):
     offset = int(request.args.get('offset'))
     sort_order = request.args.get('sortOrder')
     sort_direction = request.args.get('sortDirection')
+
+    if limit <= 0:
+        error = Error('Limit must be greater than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
+
+    if offset < 0:
+        error = Error('Offset must be greater or equal than 0')
+        return Response(jsonpickle.encode(error, unpicklable=False), 400, content_type='application/json')
 
     if sort_direction == 'asc':
         sort_order = '+' + sort_order
