@@ -21,21 +21,21 @@ class Post(db.Document):
 
 
 def get_post_list(limit, offset, sort):
-    posts = Post.objects[offset:limit].order_by(sort)
+    posts = Post.objects[offset:offset + limit].order_by(sort)
     count = Post.objects.count()
 
     return build_post_list(posts, count, limit, offset)
 
 
 def get_post_list_by_category(category, limit, offset, sort):
-    posts = Post.objects(category=category.id)[offset:limit].order_by(sort)
+    posts = Post.objects(category=category.id)[offset:offset + limit].order_by(sort)
     count = Post.objects(category=category.id).count()
 
     return build_post_list(posts, count, limit, offset)
 
 
 def get_post_list_by_tag(tag, limit, offset, sort):
-    posts = Post.objects(tags=tag.id)[offset:limit].order_by(sort)
+    posts = Post.objects(tags=tag.id)[offset:offset + limit].order_by(sort)
     count = Post.objects(tags=tag.id).count()
 
     return build_post_list(posts, count, limit, offset)
