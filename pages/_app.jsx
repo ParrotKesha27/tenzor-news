@@ -42,23 +42,23 @@ export default function App({ Component, pageProps }) {
       <React.Fragment>
         <AppBar position="fixed" color="secondary">
           <Toolbar>
-            <div class="Menu__toolbar">
+            <div className="Menu__toolbar">
               <Link href="/">
-                <a class="Menu__logo">МИФ</a>
+                <a className="Menu__logo">МИФ</a>
               </Link>
-              <div class="Menu__categories">
+              <div className="Menu__categories">
                 <Link href="/memes">
-                  <a class="Menu__category">Мемы</a>
+                  <a className="Menu__category">Мемы</a>
                 </Link>
                 <Link href="/games">
-                  <a class="Menu__category">Игры</a>
+                  <a className="Menu__category">Игры</a>
                 </Link>
                 <Link href="/cinema">
-                  <a class="Menu__category">Фильмы</a>
+                  <a className="Menu__category">Фильмы</a>
                 </Link>
               </div>
               <Link href="/new_post">
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="primary">
                   Новый пост
                 </Button>
               </Link>
