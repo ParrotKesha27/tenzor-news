@@ -16,6 +16,9 @@
 	padding: 32px 150px 0;
 	font-size: 24px;
 }
+.content p {
+	margin-bottom: 24px;
+}
 .hashtags {
 	padding: 32px 150px 0;
 }
