@@ -14,7 +14,7 @@ export default function Post({data}) {
 
 	const htmlContent = { __html: decodeURI(content) }
 	const tagsList = tags.map(({name, slug}) => 
-		<Link key={name} href={'/tag/'+slug}>
+		<Link key={name} href={'/tags/'+slug}>
 			<a className={styles.hashtag}>{name}</a>
 		</Link>
 	)

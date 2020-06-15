@@ -23,6 +23,7 @@
 	text-decoration: underline;
 	color: black;
 	font-size: 24px;
+	margin-right: 10px;
 }
 .hashtag:hover, .link:hover {
 	color: #54426B;
