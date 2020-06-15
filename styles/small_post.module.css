@@ -25,7 +25,9 @@
 }
 .postTitle {
   margin-right: 50px;
-  height: 180px;
+  height: 170px;
+  overflow: hidden;
+  margin-bottom: 10px !important;
 }
 .postLink {
   color: black;

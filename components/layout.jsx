@@ -3,11 +3,16 @@ import Container from '@material-ui/core/Container'
 //import IvanGithub from '../images/vaxo.png'
 import Link from 'next/link'
 //import utilStyles from '../styles/utils.module.css'
+import Head from 'next/head'
 
 export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home, header }) {
   return (
+  	<>
+  	<Head>
+  		<title>МИФ</title>
+  	</Head>
     <div className={styles.container}>
 			{header &&
 				<div className={styles.Title}>
@@ -46,5 +51,6 @@ export default function Layout({ children, home, header }) {
 				</Container>
     	</footer>
     </div>
+    </>
   )
 }
