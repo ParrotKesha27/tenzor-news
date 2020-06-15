@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -10,75 +9,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Link from 'next/link';
-
-const useMainStyles = makeStyles({
-  card: {
-    display: 'flex',
-    backgroundColor: '#54426B',
-    marginTop: '30px',
-    color: '#ffffff',
-  },
-  cardDetails: {
-    flex: 1,
-    marginTop: '40px',
-    marginLeft: '50px',
-    marginRight: '50px',
-  },
-  cardMedia: {
-    width: 400,
-    height: 400,
-  },
-  postInfoSpan: {
-    marginRight: '10px',
-  },
-  postTitle: {
-    marginTop: '30px',
-    marginRight: '50px',
-    height: '240px',
-  },
-  postLink: {
-    color: '#ffffff',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '#E7DFC6',
-    }
-  }
-});
-const useStyles = makeStyles({
-  card: {
-    display: 'flex',
-    backgroundColor: '#ffffff',
-    marginTop: '30px',
-  },
-  cardDetails: {
-    flex: 1,
-    marginTop: '40px',
-    marginLeft: '50px',
-    marginRight: '50px',
-  },
-  cardMedia: {
-    width: 400,
-    height: 400,
-  },
-  postInfoSpan: {
-    marginRight: '10px',
-  },
-  postTitle: {
-    marginTop: '30px',
-    marginRight: '50px',
-    height: '240px',
-  },
-  postLink: {
-    color: '#000000',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '#54426B',
-    }
-  }
-});
+import secondary from '../styles/main_post.module.css'
+import primary from '../styles/primary_post.module.css'
 
 export default function MainPost(props) {
-  const classes = props.main ? useMainStyles() : useStyles();
+  const classes = props.main ? primary : secondary;
   const { post } = props;
 
   return (
@@ -91,7 +26,7 @@ export default function MainPost(props) {
           <Typography variant="subtitle2">
             <span className={classes.postInfoSpan}>{post.author}</span>
             <span className={classes.postInfoSpan}>&#183;</span>
-            <Link href={"/" + post.category.slug} color="inherit">
+            <Link href={"/" + post.category.slug}>
               <a className={classes.postLink}>
                 <span className={classes.postInfoSpan}>{post.category.name}</span>
               </a>
@@ -108,7 +43,7 @@ export default function MainPost(props) {
           </Typography>
           <Typography variant="body2">
             {post.tags.map(({name, slug}) => (
-              <Link href={"/tags/" + slug}>
+              <Link key={slug} href={"/tags/" + slug}>
                 <a className={classes.postLink} style={{marginRight: '10px', display: 'inline-block'}}>{name} </a>
               </Link>
             ))}

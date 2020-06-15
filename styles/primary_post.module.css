@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  background-color: #54426B !important;
+  margin-top: 30px;
+  color: #ffffff !important;
+}
+.cardDetails {
+  flex: 1;
+  margin-top: 40px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.cardMedia {
+  width: 400px;
+  height: 400px;
+}
+.postInfoSpan {
+  margin-right: 10px;
+}
+.postTitle {
+  margin-top: 30px;
+  margin-right: 50px;
+  height: 240px;
+}
+.postLink {
+  color: #ffffff;
+  text-decoration: none;
+}
+.postLink:hover {
+  color: #E7DFC6;
+}

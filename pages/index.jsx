@@ -23,32 +23,32 @@ export class Blog extends React.Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <Container maxWidth="lg">
-          <main>
-            <Typography component="h2" variant="h4" color="inherit" gutterBottom>
-              Популярные материалы
-            </Typography>
-            <MainPost post={this.state.data.items[0]} main />
-            <Grid container spacing={4} style={{marginTop: '30px'}}>
-              {this.state.data.items.slice(1).map((post) => (
-                <SmallPost key={post.title} post={post} />
-              ))}
-            </Grid>
-            <Typography component="h2" variant="h4" color="inherit" gutterBottom>
-              Новые материалы
-            </Typography>
-            {this.state.items.map((post) => (
-                <MainPost key={post.title} post={post} />
+      
+      <Container maxWidth="lg">
+        <main>
+          <Typography component="h2" variant="h4" color="inherit" gutterBottom>
+            Популярные материалы
+          </Typography>
+          <MainPost post={this.state.data.items[0]} main />
+          <Grid container spacing={4} style={{marginTop: '30px'}}>
+            {this.state.data.items.slice(1).map((post) => (
+              <SmallPost key={post.title} post={post} />
             ))}
-            {this.state.hasMore &&
-              <Button variant="outlined" style={{width: '100%', marginTop: '30px'}} onClick={this.MorePosts}>
-                Загрузить еще
-              </Button>
-            }
-          </main>
-        </Container>
-      </React.Fragment>
+          </Grid>
+          <Typography component="h2" variant="h4" color="inherit" gutterBottom>
+            Новые материалы
+          </Typography>
+          {this.state.items.map((post) => (
+              <MainPost key={post.title} post={post} />
+          ))}
+          {this.state.hasMore &&
+            <Button variant="outlined" style={{width: '100%', marginTop: '30px'}} onClick={this.MorePosts}>
+              Загрузить еще
+            </Button>
+          }
+        </main>
+      </Container>
+      
     );
   }
 }
