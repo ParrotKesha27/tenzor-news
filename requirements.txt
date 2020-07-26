@@ -1,0 +1,8 @@
+Flask==1.1.2
+Flask-Cors==3.0.8
+flask-swagger-ui==3.25.0
+flask-mongoengine==0.9.5
+jsonpickle==1.4.1
+python-slugify==4.0.1
+dnspython==2.0.0
+gunicorn==20.0.4
